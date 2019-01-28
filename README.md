@@ -15,6 +15,13 @@
 
 图形对象的分层特性反映了对象之间的相互包含关系, 每个对象在图形显示中起特定作用. 一般来说, 你使用`plot` 或者`line`函数创建一条线, `matlab`会自动先帮你创建一个图(figure), 接着帮你创建一个轴(`axes`), 如果你没有自己新建的话. 现在这副图就有了最基本的层次关系`figure-axes-(plot, line, legend, text...)`
 
+```matlab
+plot(rand(4))
+f = gcf;
+f.Children % children object of the current figure
+a = gca;
+a.Children % children object of the current axes
+```
 
 这里面最主要的还是`figure` 和 `axes`这两个对象, 也是接下来会主要介绍的.
 
