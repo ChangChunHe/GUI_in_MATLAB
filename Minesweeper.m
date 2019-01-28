@@ -12,14 +12,14 @@ hf = figure('resize','off','name','Minesweeper',...
 width = 50;height = 50;xoff = 35;
 t = axes('Units','pixels', 'PlotBoxAspectRatio',[1 1 1],...
     'Position',[109,200,N*width,N*height],...
-    'XLim',[0 N*width+1],'YLim',[0 N*height+1], ...
-    'XColor','k','YColor','k', 'visible','on','xtick',[],'ytick',[],'Color',[205 197 191]/255);
-line(repmat([0;50*N],1,N+1),repmat([0:50:N*50],2,1),'color','k');
-line(repmat([0:50:50*N],2,1),repmat([0;50*N],1,N+1),'color','k');
+    'XLim',[-1 N*width+1],'YLim',[-1 N*height+1], ...
+    'XColor','k','YColor','k', 'visible','on','Color',[205 197 191]/255);
+line(repmat([0;50*N],1,N+1),repmat(0:50:N*50,2,1),'color','k');
+line(repmat(0:50:50*N,2,1),repmat([0;50*N],1,N+1),'color','k');
 initial=zeros(N);
 for i=1:N
     for j=1:N
-        initial(i,j)=sign(rand-0.8);
+        initial(i,j)=sign(rand-0.99);
         if initial(i,j)==-1
             initial(i,j)=0;
         else
@@ -29,7 +29,7 @@ for i=1:N
 end
 a=zeros(N+2,N+2);b=zeros(N+2,N+2);
 a(2:end-1,2:end-1)=initial;
-circum=[];
+circum=zeros(N);
 for counter=1:N^2
     jcols = rem(counter,N);%�У�����
     jcols(jcols==0) = N;
@@ -46,7 +46,7 @@ for counter=1:N^2
     jcols(jcols==0) = N;
     irows = ceil(counter/N);%�У�ȡ��
     size_squ = 50;
-    position = [size_squ*jcols+59 50*N+200-size_squ*irows size_squ-2 size_squ-2]*ss/3000;% here 50*N+200 has replaced 600
+    position = [size_squ*jcols+60 50*N+200-size_squ*irows size_squ-2 size_squ-2]*ss/3000;% here 50*N+200 has replaced 600
     h(counter)=uicontrol( 'FontSize',18,'FontWeight','bold','Position',position,...
         'Style','pushbutton','Tag',num2str(counter),'callback', @check,...
         'BackgroundColor',[1 1 1]);
