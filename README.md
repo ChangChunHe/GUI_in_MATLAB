@@ -17,13 +17,13 @@
 
 ```matlab
 plot(rand(4))
-f = gcf;
+f = gcf; % get current figure
 f.Children % children object of the current figure
-a = gca;
+a = gca; % get current axes
 a.Children % children object of the current axes
 ```
 
-这里面最主要的还是`figure` 和 `axes`这两个对象, 也是接下来会主要介绍的.
+接下来会主要介绍的是`figure` 和 `axes`这两个对象.
 
 
 
