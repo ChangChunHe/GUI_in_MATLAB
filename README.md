@@ -5,7 +5,7 @@
 [TOC]
 
 ### 0.coding-review
-写在组最前面, 这个[文件](./coding_review.m), 是用来对代码进行比较修改的, 尽可能使用向量化的编程的语句, 其中会有必要的解释说明.
+写在最前面, 这个[文件](./coding_review.m), 是用来对代码进行比较修改的, 尽可能使用向量化的编程的语句, 其中会有必要的解释说明.
 
 ### 1. 图(figure)的组成
 在`matlab`中, 一幅图(figure)是有层次(hierachy)的.
@@ -54,7 +54,6 @@ t = axes('Units','pixels', 'PlotBoxAspectRatio',[1 1 1],...
     'XColor','k','YColor','k', 'visible','on','Color',[205 197 191]/255);
 line(repmat([0;squ_size*N],1,N+1),repmat(0:squ_size:N*squ_size,2,1),'color','k');
 line(repmat(0:squ_size:squ_size*N,2,1),repmat([0;squ_size*N],1,N+1),'color','k');
-
 h = gobjects(N,N);
 for counter = 1:N^2
     jcols = rem(counter,N);
@@ -62,7 +61,7 @@ for counter = 1:N^2
     irows = ceil(counter/N);
     position = [squ_size+(jcols-1)*squ_size squ_size+(N-irows)*squ_size squ_size squ_size];
     h(counter)=uicontrol( 'FontSize',18,'FontWeight','bold',...
-        'Position',position,'Style','pushbutton','BackgroundColor',get(gcf,'color'));
+        'Position',position,'Style','pushbutton');
 end
 ```
 
