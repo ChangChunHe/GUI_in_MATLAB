@@ -1,9 +1,9 @@
 function check(src,~)
-global N circum h
+global N circum h flag_val
 tag = str2double(get(src,'Tag'));%把字符串转成数字
 col=ceil(tag/N);
 row = rem(tag,N);row(row==0)=N;boom=[];
-I = imread('boom.jpg');squ_size = 500/N;
+I = remove_background(imread('boom.jpg'));squ_size = 500/N;
 I = imresize(I,floor([squ_size squ_size]*0.75));
 if circum(row,col)==9
     for i=1:N
@@ -16,13 +16,17 @@ if circum(row,col)==9
         delete(h(sub2ind(size(circum),boom(i,1),boom(i,2))));
         tmp_row = boom(i,1); tmp_col = boom(i,2);
         drawnow
-        hold on;h(sub2ind(size(circum),boom(i,1),boom(i,2))) = image([squ_size*(tmp_col-1)+0.1*squ_size squ_size*tmp_col-0.1*squ_size],...
-            [N*squ_size-(tmp_row-1)*squ_size+0.1*squ_size N*squ_size-tmp_row*squ_size+0.1*squ_size],I);
+        if flag_val(boom(i,1),boom(i,2)) == 1
+            continue
+        end
+        hold on;h(sub2ind(size(circum),boom(i,1),boom(i,2))) = ...
+            image([squ_size*(tmp_col-1)+0.1*squ_size squ_size*tmp_col-0.1*squ_size],...
+            [N*squ_size-(tmp_row-1)*squ_size-0.1*squ_size N*squ_size-tmp_row*squ_size+0.1*squ_size],I);
     end
     %cancel uicontrols
     for i=1:N^2
         try
-            set(h(i),'callback','')
+            set(h(i),'callback','','buttondownfcn','')
         end
     end
 elseif circum(row,col)==0
