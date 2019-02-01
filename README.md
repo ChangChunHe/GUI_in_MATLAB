@@ -34,9 +34,8 @@ a.Children % children object of the current axes
 
 ### 3. 键盘和鼠标的交互
 
-
-#### 2. 鼠标右键的响应
-首先建立一个点击的响应, 这个使用`ButtonDownFcn`这个属性来实现, 实际上对于一个`uicontrol`而言, 它是没有右键的响应的.
+#### 1. 左右键的响应
+首先建立一个点击的响应, 这个使用`ButtonDownFcn`这个属性来实现, 实际上对于一个`uicontrol`而言, 它是没有右键的响应的, 所以这是用来补充`uicontrol`的功能的.
 ```matlab
 h = figure;
 set(h,'ButtonDownFcn',@click_events)
@@ -51,3 +50,6 @@ elseif strcmp(clickType,'normal')
     disp('click left')
 end
 ```
+
+
+#### 2. 键盘的响应
