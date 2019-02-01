@@ -64,7 +64,7 @@ for counter = 1:N^2
         'Position',position,'Style','pushbutton');
 end
 ```
-
+这里还有一个关于`image`画出炸弹和小旗子的[详解](./image_fcn.md)
 
 ### 2. uicontrol
 
