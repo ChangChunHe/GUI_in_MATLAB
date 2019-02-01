@@ -41,7 +41,7 @@ a.Children % children object of the current axes
 具体可以参见`MATLAB`的[官方文档][1], 上面两种是主要的使用的单位, 就在这里具体说一下, 其他的单位也是类似的, 就不再赘述了.
 
 ###### 4. Example
-给定N, 画出一个N*N 的正方格子, 每个格子都是一个`uicontrol`. 要求: 需要任意修改N的数值. 
+给定N, 画出一个N*N 的正方格子, 每个格子都是一个`uicontrol`. 要求: 任意修改N的数值不会改变图片的布局. 
 ```matlab
 N = 10;
 squ_size = 500/N;
@@ -74,10 +74,11 @@ end
 ### 3. 键盘和鼠标的交互
 
 #### 1. 鼠标左右键的响应
-首先建立一个点击的响应, 这个使用`ButtonDownFcn`这个属性来实现, 实际上对于一个`uicontrol`而言, 它是没有右键的响应的, 所以这是用来补充`uicontrol`的功能的.
+首先建立一个点击的响应, 这个使用`ButtonDownFcn`这个属性来实现.
 ```matlab
-h = figure;
-set(h,'ButtonDownFcn',@click_events)
+ uicontrol('Style','Pushbutton', 'Units','pixels',...
+            'Position',[100,100, 200, 100],...
+            'ButtonDownFcn',@click_events);
 ```
 这里`get`到`SelectionType`也就是你点击的方式是左键还是右键, 左键是`normal`, 右键是`alt`.
 ```matlab
