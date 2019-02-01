@@ -2,7 +2,7 @@ clear
 clc
 close all
 global N initial circum h
-N=10;squ_size = 500/N;
+N=15;squ_size = 500/N;
 bomnumber=0;
 hf = figure('resize','off','name','Minesweeper',...
     'position', [350 60 700 705],...
