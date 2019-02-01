@@ -4,7 +4,7 @@ tag = str2double(get(src,'Tag'));%把字符串转成数字
 row=ceil(tag/N);
 col = rem(tag,N);col(col==0)=N;boom=[];
 I = imread('boom.jpg');squ_size = 500/N;
-I = imresize(I,floor([squ_size squ_size]*0.8));
+I = imresize(I,floor([squ_size squ_size]*0.75));
 if circum(row,col)==9
     for i=1:N
         for j=1:N
@@ -16,7 +16,8 @@ if circum(row,col)==9
         delete(h(sub2ind(size(circum),boom(i,2),boom(i,1))));
         tmp_row = boom(i,1); tmp_col = boom(i,2);
         drawnow
-        hold on;image([squ_size*(tmp_col-1) squ_size*tmp_col],[N*squ_size-(tmp_row-1)*squ_size N*squ_size-tmp_row*squ_size],I)
+        hold on;image([squ_size*(tmp_col-1)+0.1*squ_size squ_size*tmp_col-0.1*squ_size],...
+            [N*squ_size-(tmp_row-1)*squ_size+0.1*squ_size N*squ_size-tmp_row*squ_size+0.1*squ_size],I)
     end
     %cancel uicontrols
     for i=1:N^2
