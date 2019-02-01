@@ -87,8 +87,6 @@ figHandle = ancestor(src, 'figure');
 clickType = get(figHandle, 'SelectionType');
 if strcmp(clickType, 'alt')
     disp('click right')
-elseif strcmp(clickType,'normal')
-    disp('click left')
 end
 ```
 
