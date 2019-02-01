@@ -83,7 +83,8 @@ end
 这里`get`到`SelectionType`也就是你点击的方式是左键还是右键, 左键是`normal`, 右键是`alt`.
 ```matlab
 function click_events(src,~)
-clickType = get(src, 'SelectionType');
+figHandle = ancestor(src, 'figure');
+clickType = get(figHandle, 'SelectionType');
 if strcmp(clickType, 'alt')
     disp('click right')
 elseif strcmp(clickType,'normal')
