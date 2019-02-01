@@ -41,8 +41,30 @@ a.Children % children object of the current axes
 具体可以参见`MATLAB`的[官方文档][1], 上面两种是主要的使用的单位, 就在这里具体说一下, 其他的单位也是类似的, 就不再赘述了.
 
 ###### 4. Example
-给定N, 画出一个N*N 的正方格子, 每个格子都是一个`uicontrol`. 要求: 需要可以任意修改整个图片的大小,还是任意修改N的数值. 
+给定N, 画出一个N*N 的正方格子, 每个格子都是一个`uicontrol`. 要求: 需要任意修改N的数值. 
+```matlab
+N = 10;
+squ_size = 500/N;
+hf = figure('resize','off','name','Minesweeper','unit','pixels',...
+    'position', [400 100 (N+5)*squ_size (N+3)*squ_size],...
+    'numbertitle', 'off','menubar','none','color', [205 197 191]/255);
+t = axes('Units','pixels', 'PlotBoxAspectRatio',[1 1 1],...
+    'Position',[squ_size,squ_size,N*squ_size,N*squ_size],...
+    'XLim',[0 N*squ_size],'YLim',[0 N*squ_size],'xtick',[],'ytick',[],...
+    'XColor','k','YColor','k', 'visible','on','Color',[205 197 191]/255);
+line(repmat([0;squ_size*N],1,N+1),repmat(0:squ_size:N*squ_size,2,1),'color','k');
+line(repmat(0:squ_size:squ_size*N,2,1),repmat([0;squ_size*N],1,N+1),'color','k');
 
+h = gobjects(N,N);
+for counter = 1:N^2
+    jcols = rem(counter,N);
+    jcols(jcols==0) = N;
+    irows = ceil(counter/N);
+    position = [squ_size+(jcols-1)*squ_size squ_size+(N-irows)*squ_size squ_size squ_size];
+    h(counter)=uicontrol( 'FontSize',18,'FontWeight','bold',...
+        'Position',position,'Style','pushbutton','BackgroundColor',get(gcf,'color'));
+end
+```
 
 
 ### 2. uicontrol
