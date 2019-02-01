@@ -1,5 +1,5 @@
 function switch_flag(src,~)
-global N flag_val h h_flagbox h_flag circum
+global N flag_val h h_flagbox h_flag circum win_game
 squ_size = 500/N;
 figHandle = ancestor(src, 'figure');
 clickType = get(figHandle, 'SelectionType');
