@@ -60,15 +60,83 @@ for counter = 1:N^2
     jcols(jcols==0) = N;
     irows = ceil(counter/N);
     position = [squ_size+(jcols-1)*squ_size squ_size+(N-irows)*squ_size squ_size squ_size];
-    h(counter)=uicontrol( 'FontSize',18,'FontWeight','bold',...
+    h(counter)=uicontrol('FontSize',18,'FontWeight','bold',...
         'Position',position,'Style','pushbutton');
 end
 ```
 这里还有一个关于`image`画出炸弹和小旗子的[详解](./image_fcn.md)
 
 ### 2. uicontrol
-
-
+#### 1. pushbutton
+这个是最常用的一个类型, 在上面的这个例子中也使用到了这个类型, 就不再叙述了.
+#### 2.popumenu
+弹出菜单, 这个主要用于选择的.例如
+```matlab
+clear;clc;close all
+global h
+h = uicontrol('style','popupmenu','string',{'a','b','c'},'callback',@popupmenu_callback);
+function popupmenu_callback(~,~)
+global h
+str = get(h,'string');
+val = get(h,'value');
+disp(['Your choice is: ', str{val}])
+end
+```
+这里我们通过`value`可以`get`到你选择的是第几个选项, 这样就可以进行后续的操作了
+#### 3. 其他的`uicontrol`的集合
+下面就是集成的例子
+```matlab
+clear;clc;close all
+global  h_title h_line
+x = 0:0.1:2*pi;
+y = sin(x);
+h_line = plot(x,y);
+h_title = title('');
+h_checkbox = uicontrol('style','checkbox','string','Exhibit title','callback',...
+    @checkbox,'position',[100 200 80 20]);
+c = uicontrol('Style','radiobutton','String','This is s fake button',...
+    'position',[100 100 120 20]);
+h_popupmenu = uicontrol('style','popupmenu','string',{'sin(x)','cos(x)'},'callback',...
+    @popupmenu_callback,'position',[300 200 50 20]);
+h_listbox =  uicontrol('style','listbox','string',{'blue','dark','red','green'},'callback',...
+    @listbox_callback,'position',[330 100 50 50]);
+h_slider =  uicontrol('Style','slider','SliderStep',[0.01 0.10],'callback',...
+    @slider_callback,'position',[330 270 20 80]);
+h_togglebutton =  uicontrol('Style','togglebutton','callback',...
+    @togglebutton_callback,'position',[360 240 120 30],'string','click to change linestyle');
+hpushbutton =  uicontrol('Style','pushbutton','callback',...
+    @pushbutton_callback,'position',[360 340 120 30],'string','click to change linestyle');
+function checkbox(src,~)
+global h_title
+if get(src,'value'); set(h_title,'string','This is a curve')
+else;set(h_title,'string','');end
+end
+function popupmenu_callback(src,~)
+global h_line
+if get(src,'value') == 1;set(h_line,'ydata',sin(0:0.1:2*pi))
+else;set(h_line,'ydata',cos(0:0.1:2*pi));end
+end
+function listbox_callback(src,~)
+global h_line
+c = [0,0,1;0 0 0;1 0 0;0 1 0];
+set(h_line,'color',c(get(src,'value'),:));
+end
+function slider_callback(src,~)
+global h_line
+set(h_line,'linewidth',0.5+get(src,'value')*3);
+end
+function togglebutton_callback(src,~)
+global h_line
+if get(src,'value');set(h_line,'linestyle','--');
+else; set(h_line,'linestyle','-');end
+end
+function pushbutton_callback(src,~)
+global h_line
+if get(src,'value');set(h_line,'linestyle',':');
+else; set(h_line,'linestyle','-');end
+end
+```
+实际上这些不同类型的`uicontrol`的用法都是类似的, 具体也可以参见`uicontrol`的[官方文档][2]
 
 
 ### 3. 鼠标的交互
@@ -111,7 +179,7 @@ end
 ### 4. 键盘的交互
 
 
-  [1]: https://www.mathworks.com/help/matlab/ref/figure.html#buich1u-1_sep_shared-Units
+
 
 
 ## 2. 扫雷
@@ -124,3 +192,7 @@ end
 - [x] 如果点击到了炸弹, 炸弹会全部爆出来, 注意如果你插上的小旗子是正确的, 那么那个地方的炸弹是不需要爆出来的, 其他地方的炸弹都要显示出来, 错误的小旗子可以显示一个红会的背景? 或者其他的以示区分
 - [x] 当然还需要有计时功能, 这个详解在[这里](./timeui.md). 有了计时之后可能就需要做一个排行榜的东西...
 - [x] 接着就是设置难度这个东西, 其实最初已经做好了一定的准备, 就是可以灵活的设置方块的个数就可以控制难度了. 所以我觉得可以设置成这样, 难度默认有简答, 中等和困难三个模式, 也可以自定义`N`(当然这个`N`需要有一定范围, 不能太大), 这个可以设置成下拉菜单的模式, 也就是`popumenu`这个类型的`uicontrol`, 这个类型在上面有讲到.
+
+
+  [1]: https://www.mathworks.com/help/matlab/ref/figure.html#buich1u-1_sep_shared-Units
+  [2]: https://www.mathworks.com/help/matlab/ref/uicontrol.html
