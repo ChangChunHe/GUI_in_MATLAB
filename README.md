@@ -71,27 +71,44 @@ end
 
 
 
-### 3. 键盘和鼠标的交互
+### 3. 鼠标的交互
+#### 1. 图片(figure)的鼠标按键的响应
 
-#### 1. 鼠标左右键的响应
-首先建立一个点击的响应, 这个使用`ButtonDownFcn`这个属性来实现.
 ```matlab
- uicontrol('Style','Pushbutton', 'Units','pixels',...
-            'Position',[100,100, 200, 100],...
-            'ButtonDownFcn',@click_events);
-```
-这里`get`到`SelectionType`也就是你点击的方式是左键还是右键, 左键是`normal`, 右键是`alt`.
-```matlab
-function click_events(src,~)
-figHandle = ancestor(src, 'figure');
-clickType = get(figHandle, 'SelectionType');
-if strcmp(clickType, 'alt')
-    disp('click right')
+function test_figure_mouse
+hf = figure;
+set(hf,'ButtonDownFcn',@click_type);
+end
+function click_type(src,~)
+disp(get(src,'selectiontype'))
+%注意到这个`selectiontype`, 左键点击是`normal`, 右键是`alt`, 滚轮点击是`extend`.
 end
 ```
+注意到这里使用的是`buttondownfcn`这个方法(或者叫属性)来响应你的鼠标点击这个事件. 与`uicontrol` (`style`是`pushbutton`的时候)稍稍不同的在于, 一般我们使用`callback`来响应, 这个是鼠标左键点击才会响应的, 差不多属于`uicontrol`特有的一个功能吧. 一般滴, 我们是使用`buttondownfcn`来实现鼠标点击的响应的. 
 
+#### 2. 一些控件(uicontrol)的鼠标按键的响应
+上面我们已经讲到, `uicontrol`的`callback`就可以实现鼠标左键点击的响应, 但是`uicontrol`也有`buttondownfcn`这个方法, 所以使用`buttondownfcn`就可以实现鼠标右键和滚轮的响应了.
 
-#### 2. 键盘的响应
+```matlab
+function test_mouse
+hf = figure;
+uicontrol('style', 'pushbutton', 'string', 'test', 'fontsize',16, 'fontweight','bold',...
+    'fontname', 'Times New Roman','FontAngle', 'italic',...
+    'units', 'normal', 'position',[0.18 0.6 0.1, 0.1], 'parent', hf,...
+    'fontweight', 'bold', 'callback', @call_back, 'buttondownfcn',@click_type);
+end
+function call_back(~,~)
+disp('This is from callback');
+end
+function click_type(src,~)
+figHandle = ancestor(src, 'figure');
+clickType = get(figHandle, 'SelectionType');
+disp(clickType)
+end
+```
+这里注意到我们有两个回调函数, 一个是`callback`的, 一个是`buttondownfcn`的, 可以看到在鼠标左键点击的时候默认使用的是`callback`对应的回调函数的. 另外需要注意到的是, 因为`selectiontype`是`uicontrol`所没有的, 所以只能根据`uicontrol`所在的`figure`来判断到底是哪种点击方式, 所以`fighandle = ancestor(src,'figure')`就是在寻找`uicontrol`所在的`figure`, 接着`get`该图片(figure)的`selectiontype`, 就可以得知鼠标的点击方式了.
+
+### 4. 键盘的交互
 
 
   [1]: https://www.mathworks.com/help/matlab/ref/figure.html#buich1u-1_sep_shared-Units
