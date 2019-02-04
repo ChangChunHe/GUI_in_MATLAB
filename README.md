@@ -158,6 +158,12 @@ end
 ```
 实际上这些不同类型的`uicontrol`的用法都是类似的, 具体也可以参见`uicontrol`的[官方文档][2]
 
+#### 4.uicontrol的其他属性
+
+##### 1. uicontrol显示图片
+
+##### 3. uicontrol的userdata
+
 
 ### 3.鼠标的交互
 #### 1.图片的鼠标响应
