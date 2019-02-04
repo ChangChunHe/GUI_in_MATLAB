@@ -3,11 +3,11 @@
 这个仓库主要用来用扫雷的例子来对`MATLAB`的`GUI`设计写一个较为细致的教程. 包括如何新建按钮(`pushbutton`)等等简易的`uicontrol`, 还有如何与键盘鼠标交互等等.
 
 [TOC]
-## 1. 基本的GUI知识
+## 1.基本的GUI知识
 ### 0.coding-review
 写在最前面, 这个[文件](./coding_review.m), 是用来对代码进行比较修改的, 尽可能使用向量化的编程的语句, 其中会有必要的解释说明.
 
-### 1. 图(figure)的组成
+### 1.图(figure)的组成
 在`matlab`中, 一幅图(figure)是有层次(hierachy)的.
 
 ![](./doccenter_graphicsheirarchy.png)
@@ -33,14 +33,14 @@ a.Children % children object of the current axes
 ###### 1. 'pixels' (default)     
  使用分辨率来设置位置, 这个是绝对的位置, 所以如果你希望你的图片需要在**任何**电脑上都是指定位置显示的话就使用这个吧. 例如设置`position`为[120, 200, 100, 100], 那么在任何电脑上该图片的左下角的坐标都是[120,200], 以你的屏幕左下角为坐标原点, 单位就是像素点, 比如说你的屏幕是1280*1024, 那就是说屏幕右上角的坐标是[1280,1024], 这样你也就大致知道了[120, 200]在哪了. 
 
-###### 2. normalized        
+###### 2.normalized        
 但是一般而言我们希望图片可以居中, 那么使用像素点的方式就没有那么方便, 但是此时使用`normalized`就可以设置比例, 比如设置`position`为[0.2 0.3 0.1 0.1], 那么就是认为右上角的坐标为[1,1], 然后按照比例计算这个位置. 例如如果我们希望图片居中, 那么图片的位置可以设置为[0.3 0.4 0.4 0.2].
 
-###### 3. 其他的单位(Unit)
+###### 3.其他的单位(Unit)
 
 具体可以参见`MATLAB`的[官方文档][1], 上面两种是主要的使用的单位, 就在这里具体说一下, 其他的单位也是类似的, 就不再赘述了.
 
-###### 4. Example
+###### 4.Example
 给定N, 画出一个N*N 的正方格子, 每个格子都是一个`uicontrol`. 要求: 任意修改N的数值不会改变图片的布局. 
 ```matlab
 N = 10;
@@ -66,10 +66,10 @@ end
 ```
 这里还有一个关于`image`画出炸弹和小旗子的[详解](./image_fcn.md)
 
-### 2. uicontrol
-#### 1. pushbutton
+### 2.uicontrol
+#### 1.pushbutton
 这个是最常用的一个类型, 在上面的这个例子中也使用到了这个类型, 就不再叙述了.
-#### 2. popumenu
+#### 2.popumenu
 弹出菜单, 这个主要用于选择的.例如
 ```matlab
 clear;clc;close all
@@ -83,7 +83,7 @@ disp(['Your choice is: ', str{val}])
 end
 ```
 这里我们通过`value`可以`get`到你选择的是第几个选项, 这样就可以进行后续的操作了
-#### 3. 其他的`uicontrol`的集合
+#### 3.其他的`uicontrol`的集合
 下面就是集成的例子
 ```matlab
 clear;clc;close all
@@ -154,7 +154,7 @@ end
 ```
 注意到这里使用的是`buttondownfcn`这个方法(或者叫属性)来响应你的鼠标点击这个事件. 与`uicontrol` (`style`是`pushbutton`的时候)稍稍不同的在于, 一般我们使用`callback`来响应, 这个是鼠标左键点击才会响应的, 差不多属于`uicontrol`特有的一个功能吧. 一般滴, 我们是使用`buttondownfcn`来实现鼠标点击的响应的. 
 
-#### 2. 一些控件(uicontrol)的鼠标按键的响应
+#### 2.一些控件(uicontrol)的鼠标按键的响应
 上面我们已经讲到, `uicontrol`的`callback`就可以实现鼠标左键点击的响应, 但是`uicontrol`也有`buttondownfcn`这个方法, 所以使用`buttondownfcn`就可以实现鼠标右键和滚轮的响应了.
 
 ```matlab
@@ -176,14 +176,14 @@ end
 ```
 这里注意到我们有两个回调函数, 一个是`callback`的, 一个是`buttondownfcn`的, 可以看到在鼠标左键点击的时候默认使用的是`callback`对应的回调函数的. 另外需要注意到的是, 因为`selectiontype`是`uicontrol`所没有的, 所以只能根据`uicontrol`所在的`figure`来判断到底是哪种点击方式, 所以`fighandle = ancestor(src,'figure')`就是在寻找`uicontrol`所在的`figure`, 接着`get`该图片(figure)的`selectiontype`, 就可以得知鼠标的点击方式了.
 
-### 4. 键盘的交互
+### 4.键盘的交互
 
 
 
 
-## 2. 扫雷
+## 2.扫雷
 
-### 1. 扫雷需要实现的功能
+### 1.扫雷需要实现的功能
 - [x] 左键单击显示炸弹, 或者数字, 或者连起来的空位
 - [x] 重新开始游戏, 建立一个`uicontrol`, 最好是笑脸, 单击就可以重新设置炸弹的分布
 - [x] 说到开始游戏, 以免第一次就点击到了炸弹, 可以设置在你左键点击开始的时候才分配炸弹, 这样就可以保证第一次不会碰到炸弹 了
