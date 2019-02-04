@@ -2,12 +2,32 @@
 
 这个仓库主要用来用扫雷的例子来对`MATLAB`的`GUI`设计写一个较为细致的教程. 包括如何新建按钮(`pushbutton`)等等简易的`uicontrol`, 还有如何与键盘鼠标交互等等.
 
-[TOC]
-## 1.基本的GUI知识
+[Minesweeper](#minesweeper)
+&emsp;[0.coding-review](#0coding-review)
+&emsp;[1.基本的GUI知识](#1基本的gui知识)
+&emsp;&emsp;[1.图片的组成](#1图片的组成)
+&emsp;&emsp;&emsp;[1.position](#1position)
+&emsp;&emsp;&emsp;&emsp;[1.pixels](#1pixels)
+&emsp;&emsp;&emsp;&emsp;[2.normalized](#2normalized)
+&emsp;&emsp;&emsp;&emsp;[3.其他的单位](#3其他的单位)
+&emsp;&emsp;&emsp;&emsp;[4.Example](#4example)
+&emsp;&emsp;[2.uicontrol](#2uicontrol)
+&emsp;&emsp;&emsp;[1.pushbutton](#1pushbutton)
+&emsp;&emsp;&emsp;[2.popupmenu](#2popupmenu)
+&emsp;&emsp;&emsp;[3.其他的uicontrol的集合](#3其他的uicontrol的集合)
+&emsp;&emsp;[3.鼠标的交互](#3鼠标的交互)
+&emsp;&emsp;&emsp;[1.图片的鼠标响应](#1图片的鼠标响应)
+&emsp;&emsp;&emsp;[2.一些控件的鼠标响应](#2一些控件的鼠标响应)
+&emsp;&emsp;&emsp;[4.键盘的交互](#4键盘的交互)
+&emsp;[2.扫雷](#2扫雷)
+&emsp;&emsp;[1.扫雷需要实现的功能](#1扫雷需要实现的功能)
 ### 0.coding-review
 写在最前面, 这个[文件](./coding_review.m), 是用来对代码进行比较修改的, 尽可能使用向量化的编程的语句, 其中会有必要的解释说明.
 
-### 1.图(figure)的组成
+## 1.基本的GUI知识
+
+
+### 1.图片的组成
 在`matlab`中, 一幅图(figure)是有层次(hierachy)的.
 
 ![](./doccenter_graphicsheirarchy.png)
@@ -24,19 +44,19 @@ a.Children % children object of the current axes
 
 接下来会主要介绍的是`figure` 和 `axes`这两个对象.
 
-#### 1. position
+#### 1.position
 
 先说说这个位置(`position`)这个东西啊. 其实这个东西说麻烦也挺麻烦的, 因为里面有一些比较细致的问题需要知道. 而且想要把整个布局做的美观一些, 还是需要每个小控件之间有一定距离, 搞清楚`position`怎么设置的是很重要的. 其实`position`的四个数字就是边界,  依次分别是left, buttom, width, height. 前两个数字就是左下角的坐标, 接着两个数字就是这个东西的宽和高.
 
 但是很明显现在有这样的问题, 我用什么表示坐标和宽高呢. 这里`MATLAB`提供了`Unit`的属性, 可以让你指定使用不同的方式来设置位置. 下面以`figure`为例来说明, 其他控件的位置设置也都是类似的. 
 
-###### 1. 'pixels' (default)     
+###### 1.pixels
  使用分辨率来设置位置, 这个是绝对的位置, 所以如果你希望你的图片需要在**任何**电脑上都是指定位置显示的话就使用这个吧. 例如设置`position`为[120, 200, 100, 100], 那么在任何电脑上该图片的左下角的坐标都是[120,200], 以你的屏幕左下角为坐标原点, 单位就是像素点, 比如说你的屏幕是1280*1024, 那就是说屏幕右上角的坐标是[1280,1024], 这样你也就大致知道了[120, 200]在哪了. 
 
 ###### 2.normalized        
 但是一般而言我们希望图片可以居中, 那么使用像素点的方式就没有那么方便, 但是此时使用`normalized`就可以设置比例, 比如设置`position`为[0.2 0.3 0.1 0.1], 那么就是认为右上角的坐标为[1,1], 然后按照比例计算这个位置. 例如如果我们希望图片居中, 那么图片的位置可以设置为[0.3 0.4 0.4 0.2].
 
-###### 3.其他的单位(Unit)
+###### 3.其他的单位
 
 具体可以参见`MATLAB`的[官方文档][1], 上面两种是主要的使用的单位, 就在这里具体说一下, 其他的单位也是类似的, 就不再赘述了.
 
@@ -69,7 +89,7 @@ end
 ### 2.uicontrol
 #### 1.pushbutton
 这个是最常用的一个类型, 在上面的这个例子中也使用到了这个类型, 就不再叙述了.
-#### popumenu
+#### 2.popupmenu
 弹出菜单, 这个主要用于选择的.例如
 ```matlab
 clear;clc;close all
@@ -139,8 +159,8 @@ end
 实际上这些不同类型的`uicontrol`的用法都是类似的, 具体也可以参见`uicontrol`的[官方文档][2]
 
 
-### 3. 鼠标的交互
-#### 1. 图片(figure)的鼠标按键的响应
+### 3.鼠标的交互
+#### 1.图片的鼠标响应
 
 ```matlab
 function test_figure_mouse
@@ -154,7 +174,7 @@ end
 ```
 注意到这里使用的是`buttondownfcn`这个方法(或者叫属性)来响应你的鼠标点击这个事件. 与`uicontrol` (`style`是`pushbutton`的时候)稍稍不同的在于, 一般我们使用`callback`来响应, 这个是鼠标左键点击才会响应的, 差不多属于`uicontrol`特有的一个功能吧. 一般滴, 我们是使用`buttondownfcn`来实现鼠标点击的响应的. 
 
-#### 2.一些控件(uicontrol)的鼠标按键的响应
+#### 2.一些控件的鼠标响应
 上面我们已经讲到, `uicontrol`的`callback`就可以实现鼠标左键点击的响应, 但是`uicontrol`也有`buttondownfcn`这个方法, 所以使用`buttondownfcn`就可以实现鼠标右键和滚轮的响应了.
 
 ```matlab
@@ -190,7 +210,7 @@ end
 - [x] 右键单击显示小旗子, 再次右击去掉小旗子, 注意到小旗子是有限的, 使用完了就没有了, 所以需要显示小旗子的剩余量
 - [x] 如果点击到了炸弹, 炸弹会全部爆出来, 注意如果你插上的小旗子是正确的, 那么那个地方的炸弹是不需要爆出来的, 其他地方的炸弹都要显示出来, 错误的小旗子可以显示一个红会的背景? 或者其他的以示区分
 - [x] 当然还需要有计时功能, 这个详解在[这里](./timeui.md). 有了计时之后可能就需要做一个排行榜的东西...
-- [x] 接着就是设置难度这个东西, 其实最初已经做好了一定的准备, 就是可以灵活的设置方块的个数就可以控制难度了. 所以我觉得可以设置成这样, 难度默认有简答, 中等和困难三个模式, 也可以自定义`N`(当然这个`N`需要有一定范围, 不能太大), 这个可以设置成下拉菜单的模式, 也就是`popumenu`这个类型的`uicontrol`, 这个[类型](#popupmenu)在上面有讲到.
+- [x] 接着就是设置难度这个东西, 其实最初已经做好了一定的准备, 就是可以灵活的设置方块的个数就可以控制难度了. 所以我觉得可以设置成这样, 难度默认有简答, 中等和困难三个模式, 也可以自定义`N`(当然这个`N`需要有一定范围, 不能太大), 这个可以设置成下拉菜单的模式, 也就是`popumenu`这个类型的`uicontrol`, 这个[类型](#2popupmenu)在上面有讲到.
 
 
   [1]: https://www.mathworks.com/help/matlab/ref/figure.html#buich1u-1_sep_shared-Units
