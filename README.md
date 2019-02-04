@@ -2,25 +2,25 @@
 
 这个仓库主要用来用扫雷的例子来对`MATLAB`的`GUI`设计写一个较为细致的教程. 包括如何新建按钮(`pushbutton`)等等简易的`uicontrol`, 还有如何与键盘鼠标交互等等.
 
-[Minesweeper](#minesweeper)
-&emsp;[0.coding-review](#0coding-review)
-&emsp;[1.基本的GUI知识](#1基本的gui知识)
-&emsp;&emsp;[1.图片的组成](#1图片的组成)
-&emsp;&emsp;&emsp;[1.position](#1position)
-&emsp;&emsp;&emsp;&emsp;[1.pixels](#1pixels)
-&emsp;&emsp;&emsp;&emsp;[2.normalized](#2normalized)
-&emsp;&emsp;&emsp;&emsp;[3.其他的单位](#3其他的单位)
-&emsp;&emsp;&emsp;&emsp;[4.Example](#4example)
-&emsp;&emsp;[2.uicontrol](#2uicontrol)
-&emsp;&emsp;&emsp;[1.pushbutton](#1pushbutton)
-&emsp;&emsp;&emsp;[2.popupmenu](#2popupmenu)
-&emsp;&emsp;&emsp;[3.其他的uicontrol的集合](#3其他的uicontrol的集合)
-&emsp;&emsp;[3.鼠标的交互](#3鼠标的交互)
-&emsp;&emsp;&emsp;[1.图片的鼠标响应](#1图片的鼠标响应)
-&emsp;&emsp;&emsp;[2.一些控件的鼠标响应](#2一些控件的鼠标响应)
-&emsp;&emsp;&emsp;[4.键盘的交互](#4键盘的交互)
-&emsp;[2.扫雷](#2扫雷)
-&emsp;&emsp;[1.扫雷需要实现的功能](#1扫雷需要实现的功能)
+[Minesweeper](#minesweeper)</br>
+&emsp;[0.coding-review](#0coding-review)</br>
+&emsp;[1.基本的GUI知识](#1基本的gui知识)</br>
+&emsp;&emsp;[1.图片的组成](#1图片的组成)</br>
+&emsp;&emsp;&emsp;[1.position](#1position)</br>
+&emsp;&emsp;&emsp;&emsp;[1.pixels](#1pixels)</br>
+&emsp;&emsp;&emsp;&emsp;[2.normalized](#2normalized)</br>
+&emsp;&emsp;&emsp;&emsp;[3.其他的单位](#3其他的单位)</br>
+&emsp;&emsp;&emsp;&emsp;[4.Example](#4example)</br>
+&emsp;&emsp;[2.uicontrol](#2uicontrol)</br>
+&emsp;&emsp;&emsp;[1.pushbutton](#1pushbutton)</br>
+&emsp;&emsp;&emsp;[2.popupmenu](#2popupmenu)</br>
+&emsp;&emsp;&emsp;[3.其他的uicontrol的集合](#3其他的uicontrol的集合)</br>
+&emsp;&emsp;[3.鼠标的交互](#3鼠标的交互)</br>
+&emsp;&emsp;&emsp;[1.图片的鼠标响应](#1图片的鼠标响应)</br>
+&emsp;&emsp;&emsp;[2.一些控件的鼠标响应](#2一些控件的鼠标响应)</br>
+&emsp;&emsp;&emsp;[4.键盘的交互](#4键盘的交互)</br>
+&emsp;[2.扫雷](#2扫雷)</br>
+&emsp;&emsp;[1.扫雷需要实现的功能](#1扫雷需要实现的功能)</br>
 ### 0.coding-review
 写在最前面, 这个[文件](./coding_review.m), 是用来对代码进行比较修改的, 尽可能使用向量化的编程的语句, 其中会有必要的解释说明.
 
