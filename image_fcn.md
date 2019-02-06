@@ -31,7 +31,7 @@ t = axes('Units','pixels', 'PlotBoxAspectRatio',[1 1 1],...
 line(repmat([0;squ_size*N],1,N+1),repmat(0:squ_size:N*squ_size,2,1),'color','k');
 line(repmat(0:squ_size:squ_size*N,2,1),repmat([0;squ_size*N],1,N+1),'color','k');
 h = gobjects(N,N);
-I = imread('boom.jpg');
+I = imread('./figure/boom.jpg');
 hold on
 for counter = 1:N^2
     jcols = rem(counter,N);
