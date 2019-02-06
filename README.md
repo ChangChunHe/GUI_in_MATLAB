@@ -3,34 +3,37 @@
 这个仓库主要用来用扫雷的例子来对`MATLAB`的`GUI`设计写一个较为细致的教程. 包括如何新建按钮(`pushbutton`)等等简易的`uicontrol`, 还有如何与键盘鼠标交互等等.
 
 [Minesweeper](#minesweeper)</br>
-&emsp;[0.coding-review](#0coding-review)</br>
-&emsp;[1.基本的GUI知识](#1基本的gui知识)</br>
-&emsp;&emsp;[1.图片的组成](#1图片的组成)</br>
-&emsp;&emsp;&emsp;[1.position](#1position)</br>
-&emsp;&emsp;&emsp;&emsp;[1.pixels](#1pixels)</br>
-&emsp;&emsp;&emsp;&emsp;[2.normalized](#2normalized)</br>
-&emsp;&emsp;&emsp;&emsp;[3.其他的单位](#3其他的单位)</br>
-&emsp;&emsp;&emsp;&emsp;[4.Example](#4example)</br>
-&emsp;&emsp;[2.uicontrol](#2uicontrol)</br>
-&emsp;&emsp;&emsp;[1.pushbutton](#1pushbutton)</br>
-&emsp;&emsp;&emsp;[2.popupmenu](#2popupmenu)</br>
-&emsp;&emsp;&emsp;[3.其他的uicontrol的集合](#3其他的uicontrol的集合)</br>
-&emsp;&emsp;[3.鼠标的交互](#3鼠标的交互)</br>
-&emsp;&emsp;&emsp;[1.图片的鼠标响应](#1图片的鼠标响应)</br>
-&emsp;&emsp;&emsp;[2.一些控件的鼠标响应](#2一些控件的鼠标响应)</br>
-&emsp;&emsp;&emsp;[4.键盘的交互](#4键盘的交互)</br>
-&emsp;[2.扫雷](#2扫雷)</br>
-&emsp;&emsp;[1.扫雷需要实现的功能](#1扫雷需要实现的功能)</br>
-### 0.coding-review
+&emsp;[0.coding-review](#0-coding-review)</br>
+&emsp;[1.基本的GUI知识](#1-基本的gui知识)</br>
+&emsp;&emsp;[1.图片的组成](#1-图片的组成)</br>
+&emsp;&emsp;&emsp;[1.position](#1-position)</br>
+&emsp;&emsp;&emsp;&emsp;[1.pixels](#1-pixels)</br>
+&emsp;&emsp;&emsp;&emsp;[2.normalized](#2-normalized)</br>
+&emsp;&emsp;&emsp;&emsp;[3.其他的单位](#3-其他的单位)</br>
+&emsp;&emsp;&emsp;&emsp;[4.Example](#4-example)</br>
+&emsp;&emsp;[2.uicontrol](#2-uicontrol)</br>
+&emsp;&emsp;&emsp;[1.pushbutton](#1-pushbutton)</br>
+&emsp;&emsp;&emsp;[2.popupmenu](#2-popupmenu)</br>
+&emsp;&emsp;&emsp;[3. 其他的uicontrol的集合](#3-其他的uicontrol的集合)</br>
+&emsp;&emsp;&emsp;[4. uicontrol的其他属性](#4-uicontrol的其他属性)</br>
+&emsp;&emsp;&emsp;&emsp;[1. uicontrol显示图片](#1-uicontrol显示图片)</br>
+&emsp;&emsp;&emsp;&emsp;[2. uicontrol的userdata](#2-uicontrol的userdata)</br>
+&emsp;&emsp;[3. 鼠标的交互](#3-鼠标的交互)</br>
+&emsp;&emsp;&emsp;[1. 图片的鼠标响应](#1-图片的鼠标响应)</br>
+&emsp;&emsp;&emsp;[2. 一些控件的鼠标响应](#2-一些控件的鼠标响应)</br>
+&emsp;&emsp;[4. 键盘的交互](#4-键盘的交互)</br>
+&emsp;[2. 扫雷](#2-扫雷)</br>
+&emsp;&emsp;[1. 扫雷需要实现的功能](#1-扫雷需要实现的功能)</br>
+### 0. coding-review
 写在最前面, 这个[文件](./coding_review.m), 是用来对代码进行比较修改的, 尽可能使用向量化的编程的语句, 其中会有必要的解释说明.
 
-## 1.基本的GUI知识
+## 1. 基本的GUI知识
 
 
-### 1.图片的组成
+### 1. 图片的组成
 在`matlab`中, 一幅图(figure)是有层次(hierachy)的.
 
-![](./doccenter_graphicsheirarchy.png "我是图")
+![](./doccenter_graphicsheirarchy.png "我是图 = = ")
 
 图形对象的分层特性反映了对象之间的相互包含关系, 每个对象在图形显示中起特定作用. 一般来说, 你使用`plot` 或者`line`函数创建一条线, `matlab`会自动先帮你创建一个图(figure), 接着帮你创建一个轴(`axes`), 如果你没有自己新建的话. 现在这副图就有了最基本的层次关系`figure-axes-(plot, line, legend, text...)`
 
@@ -44,23 +47,23 @@ a.Children % children object of the current axes
 
 接下来会主要介绍的是`figure` 和 `axes`这两个对象.
 
-#### 1.position
+#### 1. position
 
 先说说这个位置(`position`)这个东西啊. 其实这个东西说麻烦也挺麻烦的, 因为里面有一些比较细致的问题需要知道. 而且想要把整个布局做的美观一些, 还是需要每个小控件之间有一定距离, 搞清楚`position`怎么设置的是很重要的. 其实`position`的四个数字就是边界,  依次分别是left, buttom, width, height. 前两个数字就是左下角的坐标, 接着两个数字就是这个东西的宽和高.
 
 但是很明显现在有这样的问题, 我用什么表示坐标和宽高呢. 这里`MATLAB`提供了`Unit`的属性, 可以让你指定使用不同的方式来设置位置. 下面以`figure`为例来说明, 其他控件的位置设置也都是类似的. 
 
-###### 1.pixels
+###### 1. pixels
  使用分辨率来设置位置, 这个是绝对的位置, 所以如果你希望你的图片需要在**任何**电脑上都是指定位置显示的话就使用这个吧. 例如设置`position`为[120, 200, 100, 100], 那么在任何电脑上该图片的左下角的坐标都是[120,200], 以你的屏幕左下角为坐标原点, 单位就是像素点, 比如说你的屏幕是1280*1024, 那就是说屏幕右上角的坐标是[1280,1024], 这样你也就大致知道了[120, 200]在哪了. 
 
-###### 2.normalized        
+###### 2. normalized        
 但是一般而言我们希望图片可以居中, 那么使用像素点的方式就没有那么方便, 但是此时使用`normalized`就可以设置比例, 比如设置`position`为[0.2 0.3 0.1 0.1], 那么就是认为右上角的坐标为[1,1], 然后按照比例计算这个位置. 例如如果我们希望图片居中, 那么图片的位置可以设置为[0.3 0.4 0.4 0.2].
 
-###### 3.其他的单位
+###### 3. 其他的单位
 
 具体可以参见`MATLAB`的[官方文档][1], 上面两种是主要的使用的单位, 就在这里具体说一下, 其他的单位也是类似的, 就不再赘述了.
 
-###### 4.Example
+###### 4. Example
 给定N, 画出一个N*N 的正方格子, 每个格子都是一个`uicontrol`. 要求: 任意修改N的数值不会改变图片的布局. 
 ```matlab
 N = 10;
@@ -86,10 +89,11 @@ end
 ```
 这里还有一个关于`image`画出炸弹和小旗子的[详解](./image_fcn.md)
 
-### 2.uicontrol
-#### 1.pushbutton
+### 2. uicontrol
+`uicontrol`是MATALB中最主要的GUI控件, 下面简要介绍一下它的用法.
+#### 1. pushbutton
 这个是最常用的一个类型, 在上面的这个例子中也使用到了这个类型, 就不再叙述了.
-#### 2.popupmenu
+#### 2. popupmenu
 弹出菜单, 这个主要用于选择的.例如
 ```matlab
 clear;clc;close all
@@ -103,7 +107,7 @@ disp(['Your choice is: ', str{val}])
 end
 ```
 这里我们通过`value`可以`get`到你选择的是第几个选项, 这样就可以进行后续的操作了
-#### 3.其他的`uicontrol`的集合
+#### 3. 其他的`uicontrol`的集合
 下面就是集成的例子
 ```matlab
 clear;clc;close all
@@ -158,15 +162,15 @@ end
 ```
 实际上这些不同类型的`uicontrol`的用法都是类似的, 具体也可以参见`uicontrol`的[官方文档][2]
 
-#### 4.uicontrol的其他属性
+#### 4. uicontrol的其他属性
 
 ##### 1. uicontrol显示图片
 
-##### 3. uicontrol的userdata
+##### 2. uicontrol的userdata
 
 
-### 3.鼠标的交互
-#### 1.图片的鼠标响应
+### 3. 鼠标的交互
+#### 1. 图片的鼠标响应
 
 ```matlab
 function test_figure_mouse
@@ -180,7 +184,7 @@ end
 ```
 注意到这里使用的是`buttondownfcn`这个方法(或者叫属性)来响应你的鼠标点击这个事件. 与`uicontrol` (`style`是`pushbutton`的时候)稍稍不同的在于, 一般我们使用`callback`来响应, 这个是鼠标左键点击才会响应的, 差不多属于`uicontrol`特有的一个功能吧. 一般滴, 我们是使用`buttondownfcn`来实现鼠标点击的响应的. 
 
-#### 2.一些控件的鼠标响应
+#### 2. 一些控件的鼠标响应
 上面我们已经讲到, `uicontrol`的`callback`就可以实现鼠标左键点击的响应, 但是`uicontrol`也有`buttondownfcn`这个方法, 所以使用`buttondownfcn`就可以实现鼠标右键和滚轮的响应了.
 
 ```matlab
@@ -202,14 +206,14 @@ end
 ```
 这里注意到我们有两个回调函数, 一个是`callback`的, 一个是`buttondownfcn`的, 可以看到在鼠标左键点击的时候默认使用的是`callback`对应的回调函数的. 另外需要注意到的是, 因为`selectiontype`是`uicontrol`所没有的, 所以只能根据`uicontrol`所在的`figure`来判断到底是哪种点击方式, 所以`fighandle = ancestor(src,'figure')`就是在寻找`uicontrol`所在的`figure`, 接着`get`该图片(figure)的`selectiontype`, 就可以得知鼠标的点击方式了.
 
-### 4.键盘的交互
+### 4. 键盘的交互
 
 
 
 
-## 2.扫雷
+## 2. 扫雷
 
-### 1.扫雷需要实现的功能
+### 1. 扫雷需要实现的功能
 - [x] 左键单击显示炸弹, 或者数字, 或者连起来的空位
 - [x] 重新开始游戏, 建立一个`uicontrol`, 最好是笑脸, 单击就可以重新设置炸弹的分布
 - [x] 说到开始游戏, 以免第一次就点击到了炸弹, 可以设置在你左键点击开始的时候才分配炸弹, 这样就可以保证第一次不会碰到炸弹 了
