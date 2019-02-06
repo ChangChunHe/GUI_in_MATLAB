@@ -33,7 +33,7 @@
 ### 1. 图片的组成
 在`matlab`中, 一幅图(figure)是有层次(hierachy)的.
 
-![](./doccenter_graphicsheirarchy.png "我是图 = = ")
+![](./figure/doccenter_graphicsheirarchy.png "我是图 = = ")
 
 图形对象的分层特性反映了对象之间的相互包含关系, 每个对象在图形显示中起特定作用. 一般来说, 你使用`plot` 或者`line`函数创建一条线, `matlab`会自动先帮你创建一个图(figure), 接着帮你创建一个轴(`axes`), 如果你没有自己新建的话. 现在这副图就有了最基本的层次关系`figure-axes-(plot, line, legend, text...)`
 
