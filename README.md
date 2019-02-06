@@ -163,7 +163,7 @@ end
 实际上这些不同类型的`uicontrol`的用法都是类似的, 具体也可以参见`uicontrol`的[官方文档][2]
 
 #### 4. uicontrol的其他属性
-
+这里介绍一下其他的常用的属性, 可以让你的`uicontrol`使用的更加灵活
 ##### 1. uicontrol显示图片
 
 ##### 2. uicontrol的userdata
@@ -221,7 +221,7 @@ end
 - [x] 如果点击到了炸弹, 炸弹会全部爆出来, 注意如果你插上的小旗子是正确的, 那么那个地方的炸弹是不需要爆出来的, 其他地方的炸弹都要显示出来, 错误的小旗子可以显示一个红会的背景? 或者其他的以示区分
 - [x] 当然还需要有计时功能, 这个详解在[这里](./timeui.md). 有了计时之后可能就需要做一个排行榜的东西...
 - [x] 接着就是设置难度这个东西, 其实最初已经做好了一定的准备, 就是可以灵活的设置方块的个数就可以控制难度了. 所以我觉得可以设置成这样, 难度默认有简答, 中等和困难三个模式, 也可以自定义`N`(当然这个`N`需要有一定范围, 不能太大), 这个可以设置成下拉菜单的模式, 也就是`popumenu`这个类型的`uicontrol`, 这个[类型](#2popupmenu)在上面有讲到.
-
+或者你也可以设置成`uimenu`这种形式, 具体参见[这里](./uimenu.md)
 
   [1]: https://www.mathworks.com/help/matlab/ref/figure.html#buich1u-1_sep_shared-Units
   [2]: https://www.mathworks.com/help/matlab/ref/uicontrol.html
