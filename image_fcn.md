@@ -6,7 +6,7 @@ text(x,y,str)
 ```
 这里的`x, y` 就是笛卡尔坐标, 同样的对于一个`image`也有相应的坐标. 但是轴(`axes`)的单位需要是`pixels`, 像素的单位才比较容易操作. 
 ```matlab
-I = imread('boom.jpg');% boom.jpg源文件就在上面的仓库里面
+I = imread('./figure/boom.jpg');% boom.jpg源文件就在上面的仓库的`figure`文件夹里面
 hax = axes('unit','pixels','xlim',[0 500],'ylim',[0 500]);
 hold on % 注意这句一定要写的, 不然image函数会自动帮你重新设置轴的属性的
 h1 = image(I);% 此时在不指定图片位置的时候, 默认是从原点开始的
