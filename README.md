@@ -165,6 +165,25 @@ end
 #### 4. uicontrol的其他属性
 这里介绍一下其他的常用的属性, 可以让你的`uicontrol`使用的更加灵活
 ##### 1. uicontrol显示图片
+`ucontrol`有一个`cdata`的属性, 可以用来显示出`rgb`的三色图.例如
+```matlab
+bomb_cdata = imread('./figure/boom.jpg');
+hpushbutton =  uicontrol('Style','pushbutton','callback',...
+    'disp(''I am a boom'')','position',[360 340 40 40],'string','',...
+    'cdata',bomb_cdata);
+```
+这里一般可以将`uicontrol`的大小设置的稍微比图片的像素大一些, 否则不容易看得清楚按钮., 不过MATLAB也提供了另一种更好的设置按钮图片的方式, 就是`uipushtool`, 实际上这就是设置一个`figure`第二栏工具栏的函数, 与[`uimenu`](./uimenu.md)是类似的.
+```matlab
+f  = figure('ToolBar','none','menubar','none');
+t = uitoolbar(f);
+bomb_cdata = imread('./figure/boom.jpg');
+h_uip = uipushtool(t,'TooltipString','Toolbar push button',...
+                 'ClickedCallback',...
+                 'disp(''Clicked uipushtool.'')');
+set(h_uip,'CData', bomb_cdata);
+```
+不过缺点就在于不能随意的设置位置, 只能在最上面的位置.
+
 
 ##### 2. uicontrol的userdata
 
