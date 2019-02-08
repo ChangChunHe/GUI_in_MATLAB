@@ -60,5 +60,5 @@ set(src,'check','on')
 end
 ```
 
-  [1]: https://raw.githubusercontent.com/ChangChunHe/Minesweeper/master/figure-uimenu.png
+  [1]: https://raw.githubusercontent.com/ChangChunHe/Minesweeper/master/figure/figure-uimenu.png
   [2]: https://raw.githubusercontent.com/ChangChunHe/Minesweeper/master/figure/uimenu_check.png
