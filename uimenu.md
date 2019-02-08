@@ -1,6 +1,7 @@
 # uimenu
 
-`uimenu`就是`figure`最上方的一排`menu`, 如下图所示![][1], 
+`uimenu`就是`figure`最上方的一排`menu`, 如下图所示
+![][1]
 相比于`popupmenu`作为菜单可以更加标准一些.  下面就介绍一下`uicontrol`的一些用法.
 
 [uimenu](#uimenu)</br>
