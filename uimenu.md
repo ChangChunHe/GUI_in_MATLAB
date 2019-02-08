@@ -1,14 +1,12 @@
 # uimenu
 
-`uimenu`就是`figure`最上方的一排`menu`, 如下图所示
-
-![][1]
-
+`uimenu`就是`figure`最上方的一排`menu`, 如下图所示![][1], 
 相比于`popupmenu`作为菜单可以更加标准一些.  下面就介绍一下`uicontrol`的一些用法.
 
 [uimenu](#uimenu)</br>
 &emsp;[1. Label and Text](#1-label-and-text)</br>
-
+&emsp;[2. check](#2-check)</br>
+&emsp;[3. accelerator](#3-accelerator)</br>
 ## 1. Label and Text
 首先介绍的是菜单的名称设置, 是通过`label`或者`text`, 新的版本会移除`label`这个属性改用`text`. 
 
@@ -62,6 +60,18 @@ for ii = [2 3 1];set(h_submenu{ii},'check','off');end
 set(src,'check','on')
 end
 ```
+
+## 3. accelerator
+
+快捷键设置, 我们可以使用`Accelerator`来设置快捷打开菜单, 例如
+
+```matlab
+h_submenu{1}=uimenu(h_menu,'label','简单','callback',@simple_level,'accelerator','A');
+h_submenu{2}=uimenu(h_menu,'label','中等','callback',@middle_level,'accelerator','B');
+h_submenu{3}=uimenu(h_menu,'label','困难','callback',@hard_level,'accelerator','C');
+h_submenu{4}=uimenu(h_menu,'label','自定义难度','callback',@customize_level,'accelerator','D');
+```
+在`Windows`和`Linux`系统下使用`Ctrl + accelerator`就可以快捷打开了, `Mac`系统下是`Command + accelerator`.
 
   [1]: https://raw.githubusercontent.com/ChangChunHe/Minesweeper/master/figure/figure-uimenu.png
   [2]: https://raw.githubusercontent.com/ChangChunHe/Minesweeper/master/figure/uimenu_check.png
