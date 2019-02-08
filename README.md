@@ -172,7 +172,9 @@ hpushbutton =  uicontrol('Style','pushbutton','callback',...
     'disp(''I am a boom'')','position',[360 340 40 40],'string','',...
     'cdata',bomb_cdata);
 ```
-这里一般可以将`uicontrol`的大小设置的稍微比图片的像素大一些, 否则不容易看得清楚按钮., 不过MATLAB也提供了另一种更好的设置按钮图片的方式, 就是`uipushtool`, 实际上这就是设置一个`figure`第二栏工具栏的函数, 与[`uimenu`](./uimenu.md)是类似的.
+这里一般可以将`uicontrol`的大小设置的稍微比图片的像素大一些, 否则不容易看得清楚按钮.
+
+不过MATLAB也提供了另一种设置按钮图片的方式, 就是[uipushtool][3], 实际上这就是设置一个`figure`第二栏工具栏的函数, 与[`uimenu`](./uimenu.md)是类似的.
 ```matlab
 f  = figure('ToolBar','none','menubar','none');
 t = uitoolbar(f);
@@ -242,5 +244,7 @@ end
 - [x] 接着就是设置难度这个东西, 其实最初已经做好了一定的准备, 就是可以灵活的设置方块的个数就可以控制难度了. 一般可以设置成这样, 难度默认有简单, 中等和困难三个模式, 也可以自定义`N`(当然这个`N`需要有一定范围, 不能太大), 这个可以设置成下拉菜单的模式, 也就是`popumenu`这个类型的`uicontrol`, 这个[类型](#2popupmenu)在上面有讲到.
 或者你也可以设置成`uimenu`这种形式, 具体参见[这里](./uimenu.md)
 
+
   [1]: https://www.mathworks.com/help/matlab/ref/figure.html#buich1u-1_sep_shared-Units
   [2]: https://www.mathworks.com/help/matlab/ref/uicontrol.html
+  [3]: https://ww2.mathworks.cn/help/matlab/ref/uipushtool.html?lang=en
