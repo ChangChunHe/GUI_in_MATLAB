@@ -1,8 +1,8 @@
-# GUI in MATLAB
+#GUI in MATLAB
 
 这个仓库主要用来用扫雷的例子来对`MATLAB`的`GUI`设计写一个较为细致的教程. 包括如何新建按钮(`pushbutton`)等等简易的`uicontrol`, 还有如何与键盘鼠标交互等等.
 
-[Minesweeper](#minesweeper)</br>
+[GUI in MATLAB](#gui-in-matlab)</br>
 &emsp;[0.coding-review](#0-coding-review)</br>
 &emsp;[1.基本的GUI知识](#1-基本的gui知识)</br>
 &emsp;&emsp;[1.图片的组成](#1-图片的组成)</br>
