@@ -43,4 +43,6 @@ for counter = 1:N^2
 end
 ```
 效果如下图所示:
+
+
 ![](./figure/boom-assemblance.png)
