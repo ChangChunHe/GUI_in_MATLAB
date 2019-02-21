@@ -110,6 +110,7 @@ end
 #### 3. 其他的`uicontrol`的集合
 下面就是集成的例子
 ```matlab
+function uicontrol_galary
 clear;clc;close all
 global  h_title h_line
 x = 0:0.1:2*pi;
@@ -130,6 +131,7 @@ h_togglebutton =  uicontrol('Style','togglebutton','callback',...
     @togglebutton_callback,'position',[360 240 120 30],'string','click to change linestyle');
 hpushbutton =  uicontrol('Style','pushbutton','callback',...
     @pushbutton_callback,'position',[360 340 120 30],'string','click to change linestyle');
+end
 function checkbox(src,~)
 global h_title
 if get(src,'value'); set(h_title,'string','This is a curve')
