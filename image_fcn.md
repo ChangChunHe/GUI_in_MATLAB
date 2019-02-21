@@ -42,3 +42,5 @@ for counter = 1:N^2
     h(counter)=image(posx,posy,I);
 end
 ```
+效果如下图所示:
+![](./figure/boom-assemblance.png)
