@@ -7,6 +7,7 @@ time_ui = timer('StartDelay',0,'TimerFcn',@time_tool,...
 ```
 这里的`TimeFcn`后面跟的就是`timer`这个函数会不停调用的函数, 这里的`Period`等于1就表示每隔一秒调用一次, 例如我们设置一个计数的变量`count`, 每调用一次就加一, 那么就可以实现精确到秒的计时了. 注意到前面这个`StartDeley`这个参数, 设置成0表示开始执行这个参数是没有延迟的, 但是这个在暂停开始计时时会出现一些问题.例如下面这个例子
 ```matlab
+function test_timer
 clear;clc;close all
 global h_clock num h time_ui
 h_clock = uicontrol('FontSize',18,'FontWeight','bold',...
@@ -19,7 +20,7 @@ start(time_ui)
 h = uicontrol('FontSize',18,'FontWeight','bold',...
 'position',[100 200 105 30],'Style','pushbutton','string','Pause',...
     'BackgroundColor',get(gcf,'color'),'callback',@pause_time);
-
+end
 function pause_time(~,~)
 global time_ui h
 stop(time_ui)
