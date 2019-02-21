@@ -32,6 +32,7 @@ h_submenu{4}=uimenu(h_menu,'label','自定义难度','callback',@customize_level
 
 这里我们可以使用`check`属性实现选择难度后在前面显示对号. 实现的代码如下, 需要注意的是设置其中一个`submenu`的`check`为`on`时, 需要同时设置其余的`check`为`off`.
 ```matlab
+function test_uimenu
 clear;clc;close all
 global h_submenu
 hf = figure('menubar','none','toolbar','none');%这里是关闭默认的工具栏和菜单
@@ -42,6 +43,7 @@ h_submenu{1}=uimenu(h_menu,'label','简单','callback',@simple_level);
 h_submenu{2}=uimenu(h_menu,'label','中等','callback',@middle_level);
 h_submenu{3}=uimenu(h_menu,'label','困难','callback',@hard_level);
 h_submenu{4}=uimenu(h_menu,'label','自定义难度','callback',@customize_level);
+end
 function simple_level(src,~)
 global h_submenu
 for ii = [2 3 4];set(h_submenu{ii},'check','off');end
