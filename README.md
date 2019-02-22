@@ -132,30 +132,36 @@ h_togglebutton =  uicontrol('Style','togglebutton','callback',...
 hpushbutton =  uicontrol('Style','pushbutton','callback',...
     @pushbutton_callback,'position',[360 340 120 30],'string','click to change linestyle');
 end
+
 function checkbox(src,~)
 global h_title
 if get(src,'value'); set(h_title,'string','This is a curve')
 else;set(h_title,'string','');end
 end
+
 function popupmenu_callback(src,~)
 global h_line
 if get(src,'value') == 1;set(h_line,'ydata',sin(0:0.1:2*pi))
 else;set(h_line,'ydata',cos(0:0.1:2*pi));end
 end
+
 function listbox_callback(src,~)
 global h_line
 c = [0,0,1;0 0 0;1 0 0;0 1 0];
 set(h_line,'color',c(get(src,'value'),:));
 end
+
 function slider_callback(src,~)
 global h_line
 set(h_line,'linewidth',0.5+get(src,'value')*3);
 end
+
 function togglebutton_callback(src,~)
 global h_line
 if get(src,'value');set(h_line,'linestyle','--');
 else; set(h_line,'linestyle','-');end
 end
+
 function pushbutton_callback(src,~)
 global h_line
 if get(src,'value');set(h_line,'linestyle',':');
