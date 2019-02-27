@@ -6,7 +6,7 @@ Table of Contents
 =================
 
    * [GUI in MATLAB](#gui-in-matlab)
-         * [0. coding-review](#0-coding-review)
+      * [0. coding-review](#0-coding-review)
       * [1. 基本的GUI知识](#1-基本的gui知识)
          * [1. 图片的组成](#1-图片的组成)
             * [1. position](#1-position)
@@ -28,7 +28,7 @@ Table of Contents
       * [2. 扫雷](#2-扫雷)
          * [1. 扫雷需要实现的功能](#1-扫雷需要实现的功能)
 
-### 0. coding-review
+## 0. coding-review
 写在最前面, 这个[文件](./coding_review.m), 是用来对代码进行比较修改的, 尽可能使用向量化的编程的语句, 其中会有必要的解释说明.
 
 ## 1. 基本的GUI知识
