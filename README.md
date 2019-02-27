@@ -2,28 +2,32 @@
 
 这个仓库主要用来用扫雷的例子来对`MATLAB`的`GUI`设计写一个较为细致的教程. 包括如何新建按钮(`pushbutton`)等等简易的`uicontrol`, 还有如何与键盘鼠标交互等等.
 
-[GUI in MATLAB](#gui-in-matlab)</br>
-&emsp;[0.coding-review](#0-coding-review)</br>
-&emsp;[1.基本的GUI知识](#1-基本的gui知识)</br>
-&emsp;&emsp;[1.图片的组成](#1-图片的组成)</br>
-&emsp;&emsp;&emsp;[1.position](#1-position)</br>
-&emsp;&emsp;&emsp;&emsp;[1.pixels](#1-pixels)</br>
-&emsp;&emsp;&emsp;&emsp;[2.normalized](#2-normalized)</br>
-&emsp;&emsp;&emsp;&emsp;[3.其他的单位](#3-其他的单位)</br>
-&emsp;&emsp;&emsp;&emsp;[4.Example](#4-example)</br>
-&emsp;&emsp;[2.uicontrol](#2-uicontrol)</br>
-&emsp;&emsp;&emsp;[1.pushbutton](#1-pushbutton)</br>
-&emsp;&emsp;&emsp;[2.popupmenu](#2-popupmenu)</br>
-&emsp;&emsp;&emsp;[3. 其他的uicontrol的集合](#3-其他的uicontrol的集合)</br>
-&emsp;&emsp;&emsp;[4. uicontrol的其他属性](#4-uicontrol的其他属性)</br>
-&emsp;&emsp;&emsp;&emsp;[1. uicontrol显示图片](#1-uicontrol显示图片)</br>
-&emsp;&emsp;&emsp;&emsp;[2. uicontrol的userdata](#2-uicontrol的userdata)</br>
-&emsp;&emsp;[3. 鼠标的交互](#3-鼠标的交互)</br>
-&emsp;&emsp;&emsp;[1. 图片的鼠标响应](#1-图片的鼠标响应)</br>
-&emsp;&emsp;&emsp;[2. 一些控件的鼠标响应](#2-一些控件的鼠标响应)</br>
-&emsp;&emsp;[4. 键盘的交互](#4-键盘的交互)</br>
-&emsp;[2. 扫雷](#2-扫雷)</br>
-&emsp;&emsp;[1. 扫雷需要实现的功能](#1-扫雷需要实现的功能)</br>
+Table of Contents
+=================
+
+   * [GUI in MATLAB](#gui-in-matlab)
+         * [0. coding-review](#0-coding-review)
+      * [1. 基本的GUI知识](#1-基本的gui知识)
+         * [1. 图片的组成](#1-图片的组成)
+            * [1. position](#1-position)
+                  * [1. pixels](#1-pixels)
+                  * [2. normalized](#2-normalized)
+                  * [3. 其他的单位](#3-其他的单位)
+                  * [4. Example](#4-example)
+         * [2. uicontrol](#2-uicontrol)
+            * [1. pushbutton](#1-pushbutton)
+            * [2. popupmenu](#2-popupmenu)
+            * [3. 其他的uicontrol的集合](#3-其他的uicontrol的集合)
+            * [4. uicontrol的其他属性](#4-uicontrol的其他属性)
+               * [1. uicontrol显示图片](#1-uicontrol显示图片)
+               * [2. uicontrol的userdata](#2-uicontrol的userdata)
+         * [3. 鼠标的交互](#3-鼠标的交互)
+            * [1. 图片的鼠标响应](#1-图片的鼠标响应)
+            * [2. 一些控件的鼠标响应](#2-一些控件的鼠标响应)
+         * [4. 键盘的交互](#4-键盘的交互)
+      * [2. 扫雷](#2-扫雷)
+         * [1. 扫雷需要实现的功能](#1-扫雷需要实现的功能)
+
 ### 0. coding-review
 写在最前面, 这个[文件](./coding_review.m), 是用来对代码进行比较修改的, 尽可能使用向量化的编程的语句, 其中会有必要的解释说明.
 
