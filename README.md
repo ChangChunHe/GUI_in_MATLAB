@@ -6,7 +6,6 @@ Table of Contents
 =================
 
    * [GUI in MATLAB](#gui-in-matlab)
-   
          * [0. coding-review](#0-coding-review)
       * [1. 基本的GUI知识](#1-基本的gui知识)
          * [1. 图片的组成](#1-图片的组成)
